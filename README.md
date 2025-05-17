@@ -70,7 +70,7 @@ The application is automatically deployed to GitHub Pages using GitHub Actions. 
 4. Builds the Next.js application
 5. Deploys to GitHub Pages
 
-Visit the live site at: [https://yourusername.github.io/language-cheatsheet](https://yourusername.github.io/language-cheatsheet)
+Visit the live site at: [https://alxmassy.github.io/language-cheatsheet](https://alxmassy.github.io/language-cheatsheet)
 
 ## How It Works
 
