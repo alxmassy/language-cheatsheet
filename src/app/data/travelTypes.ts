@@ -126,10 +126,11 @@ export function getLanguagePhrases(travelTypeId: string, language: Language): Ca
     const phrases: Phrase[] = categories[category].map(englishPhrase => {
       const translationData = getTranslation(englishPhrase, language);
       
+      // Add fallback values if translation data is undefined
       return {
         english: englishPhrase,
-        translation: translationData.translation,
-        pronunciation: translationData.pronunciation
+        translation: translationData?.translation || `[${language} translation for "${englishPhrase}"]`,
+        pronunciation: translationData?.pronunciation || undefined
       };
     });
     
