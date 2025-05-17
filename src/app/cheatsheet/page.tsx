@@ -8,17 +8,6 @@ import { travelTypes, languages, getLanguagePhrases, CategoryPhrases, Language, 
 import { FaArrowLeft, FaDownload, FaPrint } from 'react-icons/fa';
 import AudioPlayer from '../components/AudioPlayer';
 
-// Add generateStaticParams for static generation
-export async function generateStaticParams() {
-  return travelTypes.map((type) => ({
-    type: type.id,
-  }));
-}
-
-// Make the page static
-export const dynamic = 'force-static';
-export const revalidate = false;
-
 export default function CheatsheetPage() {
   const searchParams = useSearchParams();
   const travelTypeId = searchParams.get('type') || 'vacation';
