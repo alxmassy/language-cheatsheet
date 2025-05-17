@@ -116,13 +116,13 @@ export const categories = {
 };
 
 // Language data organized by travel type and language
-export const getLanguagePhrases = (travelTypeId: string, language: Language): CategoryPhrases[] => {
-  const relevantTravelType = travelTypes.find(type => type.id === travelTypeId);
+export function getLanguagePhrases(travelTypeId: string, language: Language): CategoryPhrases[] {
+  const relevantTravelType = travelTypes.find(t => t.id === travelTypeId);
   if (!relevantTravelType) return [];
-  
+
   const result: CategoryPhrases[] = [];
-  
-  for (const category of relevantTravelType.categories) {
+
+  for (const category of relevantTravelType.categories as (keyof typeof categories)[]) {
     const phrases: Phrase[] = categories[category].map(englishPhrase => {
       const translationData = getTranslation(englishPhrase, language);
       
@@ -138,8 +138,8 @@ export const getLanguagePhrases = (travelTypeId: string, language: Language): Ca
       phrases
     });
   }
-  
+
   return result;
-};
+}
 
 export const languages: Language[] = ['Spanish', 'French', 'Italian', 'German', 'Japanese', 'Mandarin']; 
