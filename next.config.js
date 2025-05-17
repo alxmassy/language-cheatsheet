@@ -16,6 +16,13 @@ const nextConfig = {
   trailingSlash: true,
   // Ensure static files are generated
   distDir: 'out',
+  // Add build cache configuration
+  experimental: {
+    // Enable build cache
+    turbotrace: {
+      logLevel: 'error',
+    },
+  },
 };
 
 module.exports = nextConfig; 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,7 +11,17 @@ import AudioPlayer from '../components/AudioPlayer';
 // Default travel type if none is provided
 const DEFAULT_TRAVEL_TYPE = 'vacation';
 
-export default function CheatsheetPage() {
+// Loading component
+function Loading() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-400"></div>
+    </div>
+  );
+}
+
+// Main content component
+function CheatsheetContent() {
   const searchParams = useSearchParams();
   const travelTypeId = searchParams?.get('type') || DEFAULT_TRAVEL_TYPE;
   const [selectedLanguage, setSelectedLanguage] = useState<Language>('Spanish');
@@ -250,5 +260,14 @@ export default function CheatsheetPage() {
         </footer>
       </div>
     </div>
+  );
+}
+
+// Main page component with Suspense
+export default function CheatsheetPage() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <CheatsheetContent />
+    </Suspense>
   );
 } 
