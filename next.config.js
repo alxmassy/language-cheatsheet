@@ -5,6 +5,12 @@ const nextConfig = {
   webpack: (config) => {
     return config;
   },
+  output: 'export',
+  basePath: '/language-cheatsheet',
+  assetPrefix: '/language-cheatsheet/',
+  images: {
+    unoptimized: true,
+  },
 };
 
 module.exports = nextConfig; 
