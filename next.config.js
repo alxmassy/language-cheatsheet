@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'export',
   // Only use basePath and assetPrefix in production
-  basePath: process.env.NODE_ENV === 'production' ? '/language-cheatsheet' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/language-cheatsheet/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/language-cheatsheet/language-cheatsheet' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/language-cheatsheet/language-cheatsheet/' : '',
   images: {
     unoptimized: true,
     remotePatterns: [
