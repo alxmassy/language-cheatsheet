@@ -12,6 +12,33 @@ const openSans = Open_Sans({
 export const metadata: Metadata = {
   title: "Travello - Your Language Travel Companion",
   description: "Get instant access to essential phrases for your next adventure",
+  icons: {
+    icon: [
+      {
+        url: '/logo.png',
+        sizes: '32x32',
+        type: 'image/png',
+      },
+      {
+        url: '/logo.png',
+        sizes: '16x16',
+        type: 'image/png',
+      }
+    ],
+    apple: [
+      {
+        url: '/logo.png',
+        sizes: '180x180',
+        type: 'image/png',
+      }
+    ],
+    other: [
+      {
+        rel: 'mask-icon',
+        url: '/logo.png',
+      }
+    ]
+  }
 };
 
 export default function RootLayout({
