@@ -1,26 +1,33 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Inter, Open_Sans } from "next/font/google";
 import "./globals.css";
 
-const montserrat = Montserrat({ 
+const inter = Inter({ subsets: ["latin"] });
+const openSans = Open_Sans({ 
   subsets: ["latin"],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  variable: '--font-montserrat',
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-opensans',
 });
 
 export const metadata: Metadata = {
-  title: "Travello | Your Language Travel Companion",
-  description: "Generate personalized language cheatsheets for your travels",
+  title: "Travello - Your Language Travel Companion",
+  description: "Get instant access to essential phrases for your next adventure",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} font-sans dark bg-gray-900 text-gray-100`}>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className={`${inter.className} ${openSans.variable}`}>
         <main className="min-h-screen">
           {children}
         </main>
