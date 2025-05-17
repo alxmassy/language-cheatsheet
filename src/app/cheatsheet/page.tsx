@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { travelTypes, languages, getLanguagePhrases, CategoryPhrases, Language, Phrase } from '../data/travelTypes';
-import { FaArrowLeft, FaDownload, FaPrint } from 'react-icons/fa';
+import { FaArrowLeft, FaDownload } from 'react-icons/fa';
 import AudioPlayer from '../components/AudioPlayer';
 
 export default function CheatsheetPage() {
@@ -16,11 +16,6 @@ export default function CheatsheetPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [showTranslateModal, setShowTranslateModal] = useState(false);
-  const [translateInput, setTranslateInput] = useState('');
-  const [translateResult, setTranslateResult] = useState('');
-  const [translateTarget, setTranslateTarget] = useState<Language>('Spanish');
-  const [isTranslating, setIsTranslating] = useState(false);
 
   // Initial page load animation
   useEffect(() => {
@@ -40,10 +35,6 @@ export default function CheatsheetPage() {
       setSelectedCategory(null);
     }, 500);
   }, [travelTypeId, selectedLanguage]);
-
-  const handlePrint = () => {
-    window.print();
-  };
 
   const handleDownload = () => {
     // Creating PDF logic would go here in a real app
@@ -66,44 +57,6 @@ export default function CheatsheetPage() {
     // Default fallback to translation
     return phrase.translation;
   };
-
-  // Google Translate API call (replace with your API key and endpoint)
-  const handleTranslate = async () => {
-    setIsTranslating(true);
-    setTranslateResult('');
-    try {
-      // Example using Google Translate API v2 (replace YOUR_API_KEY)
-      const res = await fetch(
-        `https://translation.googleapis.com/language/translate/v2?key=YOUR_API_KEY`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            q: translateInput,
-            target: getGoogleLangCode(translateTarget),
-          }),
-        }
-      );
-      const data = await res.json();
-      setTranslateResult(data.data.translations[0].translatedText);
-    } catch (err) {
-      setTranslateResult('Translation failed.');
-    }
-    setIsTranslating(false);
-  };
-
-  // Helper to map Language to Google Translate codes
-  function getGoogleLangCode(lang: Language) {
-    switch (lang) {
-      case 'Spanish': return 'es';
-      case 'French': return 'fr';
-      case 'Italian': return 'it';
-      case 'German': return 'de';
-      case 'Japanese': return 'ja';
-      case 'Mandarin': return 'zh-CN';
-      default: return 'en';
-    }
-  }
 
   if (!travelType) {
     return (
@@ -228,8 +181,8 @@ export default function CheatsheetPage() {
                   {phrases
                     .find(cat => cat.category === selectedCategory)
                     ?.phrases.map((phrase, index) => (
-                      <div
-                        key={index}
+                      <div 
+                        key={index} 
                         className="p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
                       >
                         <div className="text-gray-400 mb-1 text-sm">English</div>
@@ -256,48 +209,6 @@ export default function CheatsheetPage() {
                 </div>
               </div>
             )}
-          </div>
-        )}
-
-        {/* Translate Modal */}
-        {showTranslateModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-            <div className="bg-white rounded-lg p-6 w-full max-w-md relative">
-              <button
-                className="absolute top-2 right-2 text-gray-400 hover:text-gray-700"
-                onClick={() => setShowTranslateModal(false)}
-              >
-                ×
-              </button>
-              <h2 className="text-lg font-bold mb-4 text-indigo-700">Translate</h2>
-              <input
-                className="w-full border rounded px-3 py-2 mb-3"
-                value={translateInput}
-                onChange={e => setTranslateInput(e.target.value)}
-                placeholder="Enter text to translate"
-              />
-              <select
-                className="w-full border rounded px-3 py-2 mb-3"
-                value={translateTarget}
-                onChange={e => setTranslateTarget(e.target.value as Language)}
-              >
-                {languages.map(lang => (
-                  <option key={lang} value={lang}>{lang}</option>
-                ))}
-              </select>
-              <button
-                className="w-full bg-indigo-600 text-white py-2 rounded font-semibold hover:bg-indigo-700 transition mb-3"
-                onClick={handleTranslate}
-                disabled={isTranslating}
-              >
-                {isTranslating ? 'Translating...' : 'Translate'}
-              </button>
-              {translateResult && (
-                <div className="mt-2 p-3 bg-indigo-50 rounded text-indigo-800">
-                  {translateResult}
-                </div>
-              )}
-            </div>
           </div>
         )}
 
