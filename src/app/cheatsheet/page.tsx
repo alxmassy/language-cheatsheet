@@ -8,32 +8,52 @@ import { travelTypes, languages, getLanguagePhrases, CategoryPhrases, Language, 
 import { FaArrowLeft, FaDownload } from 'react-icons/fa';
 import AudioPlayer from '../components/AudioPlayer';
 
+// Default travel type if none is provided
+const DEFAULT_TRAVEL_TYPE = 'vacation';
+
 export default function CheatsheetPage() {
   const searchParams = useSearchParams();
-  const travelTypeId = searchParams.get('type') || 'vacation';
+  const travelTypeId = searchParams?.get('type') || DEFAULT_TRAVEL_TYPE;
   const [selectedLanguage, setSelectedLanguage] = useState<Language>('Spanish');
   const [phrases, setPhrases] = useState<CategoryPhrases[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   // Initial page load animation
   useEffect(() => {
     setShowContent(true);
   }, []);
 
-  const travelType = travelTypes.find(t => t.id === travelTypeId);
+  const travelType = travelTypes.find(t => t.id === travelTypeId) || travelTypes.find(t => t.id === DEFAULT_TRAVEL_TYPE);
 
   useEffect(() => {
     setIsLoading(true);
-    // Simulate API call delay
-    setTimeout(() => {
-      const data = getLanguagePhrases(travelTypeId, selectedLanguage);
-      setPhrases(data);
+    setError(null);
+
+    try {
+      // Simulate API call delay
+      setTimeout(() => {
+        try {
+          const data = getLanguagePhrases(travelTypeId, selectedLanguage);
+          if (!data || !Array.isArray(data)) {
+            throw new Error('Invalid data received');
+          }
+          setPhrases(data);
+          setSelectedCategory(null);
+        } catch (err) {
+          console.error('Error loading phrases:', err);
+          setError('Failed to load phrases. Please try again.');
+        } finally {
+          setIsLoading(false);
+        }
+      }, 500);
+    } catch (err) {
+      console.error('Error in effect:', err);
+      setError('An unexpected error occurred. Please try again.');
       setIsLoading(false);
-      // Reset selected category when language changes
-      setSelectedCategory(null);
-    }, 500);
+    }
   }, [travelTypeId, selectedLanguage]);
 
   const handleDownload = () => {
@@ -58,14 +78,27 @@ export default function CheatsheetPage() {
     return phrase.translation;
   };
 
+  if (error) {
+    return (
+      <div className="page-container min-h-screen flex items-center justify-center">
+        <div className="glass-card p-8 max-w-md mx-auto animation-fade-in">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-6 text-red-500">Error</h1>
+            <p className="text-gray-300 mb-6">{error}</p>
+            <Link href="/" className="button-primary inline-flex items-center gap-2">
+              <FaArrowLeft /> Go back to home
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (!travelType) {
     return (
       <div className="page-container min-h-screen flex items-center justify-center">
         <div className="glass-card p-8 max-w-md mx-auto animation-fade-in">
           <div className="text-center">
-            <div className="flex items-center justify-center mb-6">
-              {/* Logo placeholder - replace with your logo */}
-            </div>
             <h1 className="text-2xl font-bold mb-6">Travel Type Not Found</h1>
             <Link href="/" className="button-primary inline-flex items-center gap-2">
               <FaArrowLeft /> Go back to home

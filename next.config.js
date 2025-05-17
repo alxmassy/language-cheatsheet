@@ -6,11 +6,16 @@ const nextConfig = {
     return config;
   },
   output: 'export',
-  basePath: '/language-cheatsheet',
-  assetPrefix: '/language-cheatsheet/',
+  // Only use basePath and assetPrefix in production
+  basePath: process.env.NODE_ENV === 'production' ? '/language-cheatsheet' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/language-cheatsheet/' : '',
   images: {
     unoptimized: true,
   },
+  // Add trailing slashes to all pages
+  trailingSlash: true,
+  // Ensure static files are generated
+  distDir: 'out',
 };
 
 module.exports = nextConfig; 
