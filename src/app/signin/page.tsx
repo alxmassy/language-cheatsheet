@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowLeft, FaEnvelope, FaLock } from 'react-icons/fa';
 
@@ -22,7 +21,7 @@ export default function SignIn() {
   }, [mousePosition]);
 
   return (
-    <div className="min-h-screen bg-black text-white relative">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative">
       {/* Mouse follower circle */}
       <div 
         className="fixed pointer-events-none z-50 transition-transform duration-100 ease-out"
@@ -31,22 +30,6 @@ export default function SignIn() {
         }}
       >
         <div className="w-8 h-8 border-2 border-white rounded-full"></div>
-      </div>
-
-      {/* Video Background */}
-      <div className="fixed inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/video-background.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/80 via-purple-900/80 to-black/80 z-0"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-600/20 via-transparent to-transparent blur-xl z-0 animate-pulse-slow"></div>
-        <div className="noise-bg absolute inset-0 z-0 opacity-10"></div>
       </div>
 
       {/* Content */}
@@ -61,15 +44,8 @@ export default function SignIn() {
         {/* Sign In Form */}
         <div className="flex-grow flex items-center justify-center px-4">
           <div className="w-full max-w-sm">
-            {/* Logo and Title */}
+            {/* Title */}
             <div className="text-center mb-6">
-              <Image 
-                src="/logo.png" 
-                alt="Travello Logo" 
-                width={60} 
-                height={60} 
-                className="mx-auto mb-3"
-              />
               <h1 className="text-3xl mb-2" style={{ fontFamily: 'Dancing Script, cursive' }}>
                 Welcome Back
               </h1>
