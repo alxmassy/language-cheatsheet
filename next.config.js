@@ -11,6 +11,12 @@ const nextConfig = {
   assetPrefix: process.env.NODE_ENV === 'production' ? '/language-cheatsheet/' : '',
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   // Add trailing slashes to all pages
   trailingSlash: true,

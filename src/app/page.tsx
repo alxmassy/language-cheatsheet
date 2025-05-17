@@ -6,6 +6,12 @@ import Image from 'next/image';
 import { travelTypes } from './data/travelTypes';
 import { FaUmbrellaBeach, FaBriefcase, FaHiking, FaCity, FaUtensils, FaArrowRight, FaGlobeAmericas, FaSignInAlt, FaPlane } from 'react-icons/fa';
 
+// Get the base path for assets
+const getAssetPath = (path: string) => {
+  const basePath = process.env.NODE_ENV === 'production' ? '/language-cheatsheet' : '';
+  return `${basePath}${path}`;
+};
+
 export default function Home() {
   const [showTravelTypes, setShowTravelTypes] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -98,7 +104,7 @@ export default function Home() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
-            <source src="/video-background.mp4" type="video/mp4" />
+            <source src={getAssetPath('/video-background.mp4')} type="video/mp4" />
           </video>
           {/* Overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/80 via-purple-900/80 to-black/80 z-0"></div>
@@ -111,7 +117,7 @@ export default function Home() {
           {/* Logo */}
           <div className="animation-drop-down">
             <Image 
-              src="/logo.png" 
+              src={getAssetPath('/logo.png')}
               alt="Travello Logo" 
               width={100} 
               height={100} 
