@@ -16,24 +16,26 @@ The Travel Language Cheatsheet Generator allows users to create personalized lan
 
 ## Technologies Used
 
-- Next.js
-- React
+- Next.js 14.2.28
+- React 18
 - TypeScript
-- Tailwind CSS
-- React Icons
+- Tailwind CSS 3.3.0
+- React Icons 5.0.1
+- GitHub Actions for CI/CD
+- GitHub Pages for deployment
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v14 or newer)
+- Node.js (v20 or newer)
 - npm
 
 ### Installation
 
 1. Clone the repository
    ```
-   git clone <repository-url>
+   git clone https://github.com/yourusername/language-cheatsheet.git
    cd language-cheatsheet
    ```
 
@@ -49,6 +51,27 @@ The Travel Language Cheatsheet Generator allows users to create personalized lan
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
 
+### Building for Production
+
+1. Build the application
+   ```
+   npm run build
+   ```
+
+2. The static files will be generated in the `out` directory
+
+## Deployment
+
+The application is automatically deployed to GitHub Pages using GitHub Actions. The deployment workflow:
+
+1. Triggers on push to main branch
+2. Sets up Node.js environment
+3. Installs dependencies
+4. Builds the Next.js application
+5. Deploys to GitHub Pages
+
+Visit the live site at: [https://yourusername.github.io/language-cheatsheet](https://yourusername.github.io/language-cheatsheet)
+
 ## How It Works
 
 1. **Select Your Travel Type**: Choose the type of travel that matches your upcoming trip
@@ -63,9 +86,13 @@ The Travel Language Cheatsheet Generator allows users to create personalized lan
 - Add a quiz feature to practice phrases
 - Enable offline access for travelers without internet
 
-## Hackathon Information
+## Contributing
 
-This project was created for [Hackathon Name] by [Your Team/Name].
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
