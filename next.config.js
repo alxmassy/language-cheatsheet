@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'export',
   // Only use basePath and assetPrefix in production
-  basePath: process.env.NODE_ENV === 'production' ? '/language-cheatsheet/language-cheatsheet' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/language-cheatsheet/language-cheatsheet/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/language-cheatsheet' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/language-cheatsheet/' : '',
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -16,8 +16,6 @@ const nextConfig = {
   },
   // Add trailing slashes to all pages
   trailingSlash: true,
-  // Ensure static files are generated in the out directory
-  distDir: 'out',
   // Add webpack configuration
   webpack: (config, { isServer }) => {
     // Add fallbacks for node modules
