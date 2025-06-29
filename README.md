@@ -35,7 +35,7 @@ The Travel Language Cheatsheet Generator allows users to create personalized lan
 
 1. Clone the repository
    ```
-   git clone https://github.com/yourusername/language-cheatsheet.git
+   git clone https://github.com/alxmassy/language-cheatsheet.git
    cd language-cheatsheet
    ```
 
@@ -77,23 +77,3 @@ Visit the live site at: [https://alxmassy.github.io/language-cheatsheet](https:/
 1. **Select Your Travel Type**: Choose the type of travel that matches your upcoming trip
 2. **Choose a Language**: Select from our range of available languages
 3. **Get Your Cheatsheet**: View your customized cheatsheet with relevant phrases
-
-## Future Enhancements
-
-- Add more travel types and languages
-- Implement text-to-speech for pronunciation
-- Create a user account system to save favorite phrases
-- Add a quiz feature to practice phrases
-- Enable offline access for travelers without internet
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
